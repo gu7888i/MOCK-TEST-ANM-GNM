@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Science: Brain Structure 50 MCQ Mock Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kohinoor+Bangla:wght@400;600;700&display=swap');
+        body { font-family: 'Kohinoor Bangla', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen py-6 px-3">
+
+    <div class="max-w-3xl mx-auto">
+        <!-- Header & Timer Bar -->
+        <div class="bg-white shadow-md rounded-xl p-4 mb-4 flex justify-between items-center sticky top-2 z-10 border border-slate-200">
+            <div>
+                <h1 class="text-lg md:text-xl font-bold text-slate-800">মস্তিষ্কের গঠন ও কাজ (50 MCQ)</h1>
+                <p class="text-xs md:text-sm text-slate-500">মোট নম্বর: ৫০ | বিষয়: জীবনবিজ্ঞান</p>
+            </div>
+            <div id="timer" class="bg-red-50 text-red-600 font-bold px-3 py-1.5 md:px-4 md:py-2 rounded-lg border border-red-200 text-sm md:text-base">
+                সময় বাকি: <span id="time">৪৫:০০</span>
+            </div>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="bg-white shadow-md rounded-xl p-5 md:p-8 border border-slate-200">
+            <div id="question-box">
+                <!-- Question content dynamically rendered here -->
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center mt-6 pt-4 border-t border-slate-200">
+                <button id="prev-btn" onclick="prevQuestion()" class="bg-slate-200 text-slate-700 px-5 py-2 rounded-lg font-semibold hover:bg-slate-300 transition text-sm md:text-base">পূর্ববর্তী</button>
+                <span id="question-count" class="text-xs md:text-sm text-slate-500 font-medium"></span>
+                <button id="next-btn" onclick="nextQuestion()" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition text-sm md:text-base">পরবর্তী</button>
+            </div>
+        </div>
+
+        <!-- Result Box -->
+        <div id="result-box" class="bg-white shadow-md rounded-xl p-6 md:p-8 text-center hidden border border-slate-200">
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">মক টেস্ট সম্পন্ন হয়েছে!</h2>
+            <p class="text-slate-600 mb-4">মস্তিষ্কের গঠন ও কাজ সম্পর্কিত ৫০টি প্রশ্নের মধ্যে আপনার প্রাপ্ত নম্বর:</p>
+            <div class="text-5xl font-extrabold text-blue-600 my-4"><span id="score">0</span> / ৫০</div>
+            <p id="feedback-text" class="text-slate-500 mb-6 font-medium"></p>
+            <button onclick="restartQuiz()" class="bg-green-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-green-700 transition">পুনরায় মক টেস্ট দিন</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { question: "১. মানবদেহের কেন্দ্রীয় স্নায়ুতন্ত্র (CNS) কোন দুটি অংশ নিয়ে গঠিত?", options: ["মস্তিষ্ক ও সুষুম্নাকাণ্ড", "মস্তিষ্ক ও করোটিক স্নায়ু", "সুষুম্নাকাণ্ড ও সুষুম্নীয় স্নায়ু", "মস্তিষ্ক ও অনুভূতিশীল স্নায়ু"], answer: 0 },
+            { question: "২. মানব মস্তিষ্কের আবরণীকে কী বলা হয়?", options: ["প্লুরা (Pleura)", "পেরিকার্ডিয়াম (Pericardium)", "মেনিনজেস (Meninges)", "পেসিটোনিয়াম (Peritoneum)"], answer: 2 },
+            { question: "৩. মেনিনজেস আবরণের সবচেয়ে বাইরের স্তরটির নাম কী?", options: ["ডুরা ম্যাটার (Dura Mater)", "পায়া ম্যাটার (Pia Mater)", "অ্যারাকনয়েড ম্যাটার (Arachnoid Mater)", "কোনোটিই নয়"], answer: 0 },
+            { question: "৪. মেনিনজেস আবরণের সবচেয়ে ভেতরের স্তরটির নাম কী?", options: ["ডুরা ম্যাটার", "পায়া ম্যাটার", "অ্যারাকনয়েড ম্যাটার", "সাব-অ্যারাকনয়েড"], answer: 1 },
+            { question: "৫. মস্তিষ্কের গহ্বরে যে তরল পদার্থ থাকে তাকে কী বলে?", options: ["রক্তের প্লাজমা", "লিম্ফ (Lymph)", "সেরিব্রোস্পাইনাল ফ্লুইড (CSF)", "সিনোভিফিয়াল ফ্লুইড"], answer: 2 },
+            { question: "৬. একজন প্রাপ্তবয়স্ক মানুষের মস্তিষ্কের গড় ওজন কত?", options: ["১.৩৬ - ১.৪ কেজি", "২.০ - ২.২ কেজি", "৫০০ - ৮০০ গ্রাম", "৩.০ কেজি"], answer: 0 },
+            { question: "৭. মস্তিষ্কে নিউরনের আনুমানিক সংখ্যা কত?", options: ["প্রায় ১০ লাখ", "প্রায় ১০ কোটি", "প্রায় ১০,০০০ কোটি (86 Billion)", "প্রায় ৫০ লাখ"], answer: 2 },
+            { question: "৮. মানব মস্তিষ্কের সবচেয়ে বড় অংশের নাম কী?", options: ["লঘুমস্তিষ্ক (Cerebellum)", "থ্যালামাস (Thalamus)", "গুরুমস্তিষ্ক (Cerebrum)", "পনস (Pons)"], answer: 2 },
+            { question: "৯. গুরুমস্তিষ্কের ডান ও বাম গোলার্ধ দুটি কোন স্নায়ুগুচ্ছ দিয়ে যুক্ত থাকে?", options: ["ভ্যাগাস স্নায়ু", "কর্পাস ক্যালোসাম (Corpus Callosum)", "পনস", "ভার্মিস (Vermis)"], answer: 1 },
+            { question: "১০. মানুষের চিন্তা, বুদ্ধি, স্মৃতিশক্তি ও চেতনার প্রধান কেন্দ্র কোনটি?", options: ["লঘুমস্তিষ্ক", "গুরুমস্তিষ্ক", "হাইপোথ্যালামাস", "সুষুম্নাশীর্ষক"], answer: 1 },
+            { question: "১১. গুরুমস্তিষ্কের বাইরের ধূসর অঞ্চলকে কী বলা হয়?", options: ["সেরিব্রাল কর্টেক্স (Cerebral Cortex)", "মেডুলা", "পনস", "কায়াজমা"], answer: 0 },
+            { question: "১২. গুরুমস্তিষ্কের উপরিভাগের উঁচু ও ভাঁজ হওয়া অংশগুলোকে কী বলা হয়?", options: ["সালকাস (Sulcus)", "জাইরাস (Gyrus)", "লোব (Lobe)", "গ্যাংগ্লিয়া"], answer: 1 },
+            { question: "১৩. দৃষ্টি সংক্রান্ত অনুভূতির কেন্দ্র গুরুমস্তিষ্কের কোন লোবে অবস্থিত?", options: ["ফ্রন্টাল লোব (Frontal Lobe)", "প্যারাইটাল লোব (Parietal Lobe)", "অক্সিপিটাল লোব (Occipital Lobe)", "টেম্পোরাল লোব (Temporal Lobe)"], answer: 2 },
+            { question: "১৪. শ্রবণ ও ঘ্রাণ অনুভূতির কেন্দ্র গুরুমস্তিষ্কের কোন লোবে থাকে?", options: ["ফ্রন্টাল লোব", "টেম্পোরাল লোব (Temporal Lobe)", "অক্সিপিটাল লোব", "প্যারাইটাল লোব"], answer: 1 },
+            { question: "১৫. মস্তিষ্কের প্রধান 'রিলেই স্টেশন' (Relay Station) হিসেবে কাজ করে কোনটি?", options: ["হাইপোথ্যালামাস", "থ্যালামাস", "পনস", "লঘুমস্তিষ্ক"], answer: 1 },
+            { question: "১৬. মানবদেহের তাপমাত্রা নিয়ন্ত্রণ কেন্দ্র (Thermostat) কোনটি?", options: ["থ্যালামাস", "হাইপোথ্যালামাস", "লঘুমস্তিষ্ক", "সুষুম্নাশীর্ষক"], answer: 1 },
+            { question: "১৭. ক্ষুধা, তৃষ্ণা, ঘুম ও আবেগ নিয়ন্ত্রণ করে মস্তিষ্কের কোন অংশ?", options: ["সুষুম্নাকাণ্ড", "হাইপোথ্যালামাস", "মধ্যমস্তিষ্ক", "পনস"], answer: 1 },
+            { question: "১৮. মাস্টার গ্ল্যান্ড বা পিটুইটারি গ্রন্থি মস্তিষ্কের কোন অংশের সাথে যুক্ত থাকে?", options: ["থ্যালামাস", "হাইপোথ্যালামাস", "লঘুমস্তিষ্ক", "সুষুম্নাশীর্ষক"], answer: 1 },
+            { question: "১৯. দর্শন ও শ্রবণ উদ্দীপনা অনুযায়ী মাথা ও অক্ষিগোলকের রিফ্লেক্স স্পন্দন নিয়ন্ত্রণ করে কোনটি?", options: ["মধ্যমস্তিষ্ক (Midbrain)", "থ্যালামাস", "লঘুমস্তিষ্ক", "সুষুম্নাকাণ্ড"], answer: 0 },
+            { question: "২০. দেহের ভারসাম্য রক্ষা এবং পেশিটান নিয়ন্ত্রণ করে মস্তিষ্কের কোন অংশ?", options: ["গুরুমস্তিষ্ক", "লঘুমস্তিষ্ক (Cerebellum)", "হাইপোথ্যালামাস", "সুষুম্নাশীর্ষক"], answer: 1 },
+            { question: "২১. লঘুমস্তিষ্কের গোলার্ধ দুটি কিসের সাহায্যে যুক্ত থাকে?", options: ["কর্পাস ক্যালোসাম", "ভার্মিস (Vermis)", "পনস", "গ্যাংগ্লিয়ন"], answer: 1 },
+            { question: "২২. মদ্যপান করলে মস্তিষ্কের কোন অংশের কার্যকারিতা বাধাগ্রস্ত হওয়ায় মানুষ ভারসাম্য হারায়?", options: ["গুরুমস্তিষ্ক", "লঘুমস্তিষ্ক (Cerebellum)", "থ্যালামাস", "মেডুলা অবলংগাটা"], answer: 1 },
+            { question: "২৩. হৃদস্পন্দন, শ্বাসকার্য এবং রক্তচাপ নিয়ন্ত্রণ কেন্দ্র কোনটি?", options: ["লঘুমস্তিষ্ক", "পনস", "সুষুম্নাশীর্ষক (Medulla Oblongata)", "থ্যালামাস"], answer: 2 },
+            { question: "২৪. কাশি, বমি, হাঁচি এবং লালাস্রাব নিয়ন্ত্রণের কেন্দ্র কোনটি?", options: ["মেডুলা অবলংগাটা (Medulla Oblongata)", "গুরুমস্তিষ্ক", "হাইপোথ্যালামাস", "পনস"], answer: 0 },
+            { question: "২৫. শ্বাসকার্যের হার (Breathing Pattern) নিয়ন্ত্রণে সাহায্যকারী 'পনস' (Pons) কোথায় থাকে?", options: ["অগ্রমস্তিষ্কে", "মধ্যমস্তিষ্কে", "পশ্চাৎ মস্তিষ্কে", "সুষুম্নাকাণ্ডে"], answer: 2 },
+            { question: "২৬. মস্তিষ্কের কোন অংশটি সুষুম্নাকাণ্ডের (Spinal Cord) সাথে যুক্ত থাকে?", options: ["পনস", "মেডুলা অবলংগাটা", "লঘুমস্তিষ্ক", "থ্যালামাস"], answer: 1 },
+            { question: "২৭. ব্রেন স্টেম (Brain Stem) গঠিত হয় মস্তিষ্কের কোন ৩টি অংশ নিয়ে?", options: ["মধ্যমস্তিষ্ক, পনস ও মেডুলা অবলংগাটা", "গুরুমস্তিষ্ক, লঘুমস্তিষ্ক ও থ্যালামাস", "হাইপোথ্যালামাস, পনস ও সুষুম্নাকাণ্ড", "লঘুমস্তিষ্ক, পনস ও মেডুলা"], answer: 0 },
+            { question: "২৮. মানুষের করোটিক স্নায়ুর (Cranial Nerves) সংখ্যা কত জোড়া?", options: ["১০ জোড়া", "১২ জোড়া", "৩১ জোড়া", "২৪ জোড়া"], answer: 1 },
+            { question: "২৯. মানুষের সুষুম্নীয় স্নায়ুর (Spinal Nerves) সংখ্যা কত জোড়া?", options: ["১২ জোড়া", "২৪ জোড়া", "৩১ জোড়া", "৬২ জোড়া"], answer: 2 },
+            { question: "৩০. প্রথম করোটিক স্নায়ু (Cranial Nerve I) কোনটি?", options: ["অপটিক স্নায়ু", "অলফ্যাক্টরি স্নায়ু (Olfactory Nerve)", "ভ্যাগাস স্নায়ু", "ট্রাইজেমিনাল স্নায়ু"], answer: 1 },
+            { question: "৩১. দর্শনের অনুভূতি মস্তিষ্কে পৌঁছে দেয় কোন স্নায়ু?", options: ["অলফ্যাক্টরি স্নায়ু", "অপটিক স্নায়ু (Optic Nerve)", "ভ্যাগাস স্নায়ু", "অডিটরি স্নায়ু"], answer: 1 },
+            { question: "৩২. মানবদেহের দীর্ঘতম করোটিক স্নায়ু কোনটি?", options: ["অপটিক স্নায়ু", "ট্রাইজেমিনাল", "ভ্যাগাস স্নায়ু (Vagus Nerve)", "ফেসিয়াল স্নায়ু"], answer: 2 },
+            { question: "৩৩. স্মৃতিভ্রংশ হওয়াকে চিকিৎসা বিজ্ঞানের পরিভাষায় কী বলে?", options: ["প্যারালাইসিস", "অ্যামনেশিয়া (Amnesia)", "অ্যাসফিক্সিয়া", "ডিসলেক্সিয়া"], answer: 1 },
+            { question: "৩৪. মস্তিষ্কের কোন ভেণ্ট্রিকলে (Ventricle) তরল জমা হয়ে মাথা ফুলে যাওয়াকে কী বলে?", options: ["হাইড্রোসেফালাস (Hydrocephalus)", "এনসেফালাইটিস", "মেনিনজাইটিস", "স্ট্রোক"], answer: 0 },
+            { question: "৩৫. মেনিনজেস আবরণের প্রদাহ বা ইনফেকশনকে কী বলা হয়?", options: ["ব্রঙ্কাইটিস", "মেনিনজাইটিস (Meningitis)", "নেফ্রাইটিস", "গেঁটে বাত"], answer: 1 },
+            { question: "৩৬. মস্তিষ্কের তড়িৎ তরঙ্গ (Electrical Activity) পরিমাপক যন্ত্রের নাম কী?", options: ["ECG", "EEG (Electroencephalogram)", "MRI", "CT Scan"], answer: 1 },
+            { question: "৩৭. মস্তিষ্কে রক্ত সরবরাহে ব্যাঘাত ঘটলে তাকে কী বলা হয়?", options: ["হার্ট অ্যাটাক", "স্ট্রোক (Stroke)", "থ্রম্বোসিস", "অ্যানিউরিজম"], answer: 1 },
+            { question: "৩৮. প্রতিবর্ত ক্রিয়া (Reflex Action) মূলত কার দ্বারা নিয়ন্ত্রিত হয়?", options: ["গুরুমস্তিষ্ক", "সুষুম্নাকাণ্ড (Spinal Cord)", "থ্যালামাস", "পনস"], answer: 1 },
+            { question: "৩৯. সুষুম্নাকাণ্ড কেন্দ্রীয় স্নায়ুতন্ত্রের কোন অংশ থেকে তৈরি হয়?", options: ["পনস", "মেডুলা অবলংগাটার শেষ প্রান্ত", "হাইপোথ্যালামাস", "লঘুমস্তিষ্ক"], answer: 1 },
+            { question: "৪০. নিউরনের কোন অংশটি মস্তিষ্ক থেকে বার্তা পরিবাহিত করতে সাহায্য করে?", options: ["ডেনড্রন", "অ্যাক্সন (Axon)", "সাইটন", "কমা"], answer: 1 },
+            { question: "৪১. মস্তিষ্কের সাদা অংশ (White Matter) কিসের উপস্থিতির কারণে সাদা দেখায়?", options: ["নিউরোসাইটন", "মায়েলিন শিথ যুক্ত অ্যাক্সন (Myelinated Axons)", "প্রোটিন", "ডেনড্রাইট"], answer: 1 },
+            { question: "৪২. ধূসর বস্তু (Grey Matter) কী নিয়ে গঠিত?", options: ["নিউরনের কোষদেহ (Cell bodies/Soma)", "অ্যাক্সন", "ফ্যাটি টিস্যু", "মেনিনজেস"], answer: 0 },
+            { question: "৪৩. লঘুমস্তিষ্কের উপরিভাগকে কী বলা হয়?", options: ["সেরিব্রাল কর্টেক্স", "সেরিবেলার কর্টেক্স (Cerebellar Cortex)", "মেনিনজেস", "সালকাস"], answer: 1 },
+            { question: "৪৪. মস্তিষ্কের 'গাছের মতো' শাখা-প্রশাখাযুক্ত ভেতরের সাদাকায় গঠনকে কী বলে?", options: ["আর্বর ভিটি (Arbor Vitae)", "কর্পাস স্ট্রাইয়াটাম", "ফোরামেন", "কায়াজমা"], answer: 0 },
+            { question: "৪৫. শব্দের তীব্রতা বিশ্লেষণ করার জন্য মস্তিষ্কের কোন অংশ কাজ করে?", options: ["টেম্পোরাল লোব", "ফ্রন্টাল লোব", "অক্সিপিটাল লোব", "হাইপোথ্যালামাস"], answer: 0 },
+            { question: "৪৬. পারকিনসন্স রোগ (Parkinson's Disease) মস্তিষ্কের কোন রাসায়নিকের অভাবে হয়?", options: ["অ্যাসিটাইলকোলিন", "ডোপামিন (Dopamine)", "সেরোটোনিন", "অ্যাড্রেনালিন"], answer: 1 },
+            { question: "৪৭. বাইসাইকেল চালানো বা সাঁতার কাটার স্মৃতি মস্তিষ্কের কোথায় সংরক্ষিত হয়?", options: ["গুরুমস্তিষ্ক", "লঘুমস্তিষ্ক (Cerebellum)", "হাইপোথ্যালামাস", "সুষুম্নাশীর্ষক"], answer: 1 },
+            { question: "৪৮. পিটুইটারি গ্রন্থি ও পাইনিয়াল গ্রন্থি মস্তিষ্কের কোন অংশের সাথে যুক্ত?", options: ["অগ্রমস্তিষ্ক (Forebrain)", "মধ্যমস্তিষ্ক (Midbrain)", "পশ্চাৎ মস্তিষ্ক (Hindbrain)", "সুষুম্নাকাণ্ড"], answer: 0 },
+            { question: "৪৯. মানুষের ভারসাম্য রক্ষাকারী অষ্টম করোটিক স্নায়ু (8th Cranial Nerve) কোনটি?", options: ["অডিটরি / ভেস্টিবুলোককলিয়ার স্নায়ু", "অপটিক স্নায়ু", "ট্রাইজেমিনাল", "ফেসিয়াল"], answer: 0 },
+            { question: "৫০. মস্তিষ্কের প্রতিরক্ষার জন্য রক্তের সাথে মস্তিষ্কের মধ্যকার বিশেষ বাধাটি কী নামে পরিচিত?", options: ["ব্লাড-ব্রেন ব্যারিয়ার (Blood-Brain Barrier - BBB)", "সাব-অ্যারাকনয়েড ব্যারিয়ার", "মেনিনজিয়াল গেট", "ভাস্কুলার গেট"], answer: 0 }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = {};
+        let timeLeft = 45 * 60; // ৪৫ মিনিট
+
+        const timerDisplay = document.getElementById("time");
+        const questionBox = document.getElementById("question-box");
+        const quizContainer = document.getElementById("quiz-container");
+        const resultBox = document.getElementById("result-box");
+        const scoreDisplay = document.getElementById("score");
+        const questionCount = document.getElementById("question-count");
+
+        // টাইমার ফাংশনালিটি (বাংলা সংখ্যা সাপোর্ট সহ)
+        function toBengaliNumerals(num) {
+            const bnNums = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return num.toString().split('').map(d => bnNums[d] || d).join('');
+        }
+
+        const timerInterval = setInterval(() => {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            let formattedSec = seconds < 10 ? '0' + seconds : seconds;
+            timerDisplay.textContent = `${toBengaliNumerals(minutes)}:${toBengaliNumerals(formattedSec)}`;
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            }
+            timeLeft--;
+        }, 1000);
+
+        function loadQuestion() {
+            let q = questions[currentQuestion];
+            let optionsHtml = "";
+            q.options.forEach((opt, index) => {
+                let checked = userAnswers[currentQuestion] === index ? "checked" : "";
+                let optionLetter = ['(A)', '(B)', '(C)', '(D)'][index];
+                optionsHtml += `
+                    <label class="flex items-center space-x-3 p-3.5 border border-slate-200 rounded-lg cursor-pointer hover:bg-blue-50 transition">
+                        <input type="radio" name="option" value="${index}" ${checked} onclick="saveAnswer(${currentQuestion}, ${index})" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <span class="text-slate-700 font-medium text-sm md:text-base"><strong class="text-blue-600 mr-1">${optionLetter}</strong> ${opt}</span>
+                    </label>
+                `;
+            });
+
+            questionBox.innerHTML = `
+                <div class="mb-4">
+                    <span class="text-xs font-bold text-blue-600 uppercase bg-blue-50 px-2.5 py-1 rounded border border-blue-100">প্রশ্ন ${toBengaliNumerals(currentQuestion + 1)}</span>
+                    <h3 class="text-base md:text-lg font-bold text-slate-800 mt-2">${q.question}</h3>
+                </div>
+                <div class="space-y-3">${optionsHtml}</div>
+            `;
+
+            questionCount.textContent = `${toBengaliNumerals(currentQuestion + 1)} / ${toBengaliNumerals(questions.length)}`;
+            document.getElementById("prev-btn").style.visibility = currentQuestion === 0 ? "hidden" : "visible";
+            document.getElementById("next-btn").textContent = currentQuestion === questions.length - 1 ? "জমা দিন (Submit)" : "পরবর্তী";
+        }
+
+        function saveAnswer(qIndex, optIndex) {
+            userAnswers[qIndex] = optIndex;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                submitQuiz();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.answer) {
+                    score += 1;
+                }
+            });
+            
+            quizContainer.classList.add("hidden");
+            resultBox.classList.remove("hidden");
+            scoreDisplay.textContent = toBengaliNumerals(score);
+
+            let feedback = "";
+            if (score >= 45) feedback = "চমৎকার ফলাফল! আপনার মস্তিষ্কের গঠন সংক্রান্ত প্রস্তুতি খুব ভালো।";
+            else if (score >= 35) feedback = "বেশ ভালো পারফরম্যান্স! আরেকটু রিভিশন দিলে ৫০ এ ৫০ নিশ্চিত।";
+            else feedback = "আরো একটু মনোযোগ দিয়ে চ্যাপ্টারটি রিভিশন করুন।";
+            document.getElementById("feedback-text").textContent = feedback;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = {};
+            timeLeft = 45 * 60;
+            resultBox.classList.add("hidden");
+            quizContainer.classList.remove("hidden");
+            loadQuestion();
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
